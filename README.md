@@ -18,8 +18,6 @@ $${\color{red}OKE \space Cluster \space deployment \space yet.}$$
 
 Terraform module to Quickstart deploy network resources on OCI and to be reused by other projects. This module is designed to be used with the [OCI Resource Manager][oci_rm] to deploy a cluster in a single step. The module can also be used with the [OCI Terraform Provider][oci_tf_provider] to deploy a cluster using local or CloudShell Terraform cli.
 
-Sub modules are provided to create a cluster with a single node pool, or a cluster with multiple node pools. Enables Cluster Autoscaler, OCI Vault(KMS) for customer-managed encryption keys for secrets, block volumes. The module also provides a sub module to create a cluster with a single node pool and a private endpoint to Oracle Resource Manager (ORM).
-
 ## Usage
 
 There are multiple examples included in the [examples](https://github.com/oracle-quickstart/terraform-oci-networking/tree/main/examples) folder but simple usage is as follows:
