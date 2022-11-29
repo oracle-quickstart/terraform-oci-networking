@@ -10,9 +10,9 @@ $${\color{red}OKE \space Cluster \space deployment \space yet.}$$
 
 [![Stack Release](https://img.shields.io/github/v/release/oracle-quickstart/terraform-oci-networking.svg)](https://github.com/oracle-quickstart/terraform-oci-networking/releases)
 [![Stack Build](https://img.shields.io/github/workflow/status/oracle-quickstart/terraform-oci-networking/Generate%20stacks%20and%20publish%20release?label=stack&logo=oracle&logoColor=red)][magic_oke_stack]
-![AquaSec TFSec](https://img.shields.io/github/workflow/status/oracle-quickstart/terraform-oci-networking/tfsec?label=tfsec&logo=aqua)
+[![AquaSec TFSec](https://img.shields.io/github/workflow/status/oracle-quickstart/terraform-oci-networking/tfsec?label=tfsec&logo=aqua)](#)
 ![Terraform](https://img.shields.io/badge/terraform->%3D%201.1-%235835CC.svg?logo=terraform)
-![Stack License](https://img.shields.io/github/license/oracle-quickstart/terraform-oci-networking)
+[![Stack License](https://img.shields.io/github/license/oracle-quickstart/terraform-oci-networking)](https://github.com/oracle-quickstart/terraform-oci-networking/tree/main/LICENSE)
 ![Stack Downloads](https://img.shields.io/github/downloads/oracle-quickstart/terraform-oci-networking/total?logo=terraform)
 [![GitHub issues](https://img.shields.io/github/issues/oracle-quickstart/terraform-oci-networking.svg)](https://github.com/oracle-quickstart/terraform-oci-networking/issues)
 
