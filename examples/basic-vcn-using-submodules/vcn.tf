@@ -1,5 +1,5 @@
 module "vcn" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.1.0"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.1.1"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
@@ -11,8 +11,8 @@ module "vcn" {
   create_new_vcn          = true
   existent_vcn_ocid       = ""
   cidr_blocks             = ["10.0.0.0/16"]
-  display_name            = "Dev VCN"
-  dns_label               = ""
+  display_name            = "[${local.app_name}] VCN (${local.deploy_id})"
+  dns_label               = "${local.app_name_for_dns}${local.deploy_id}"
   is_ipv6enabled          = false
   ipv6private_cidr_blocks = []
 }

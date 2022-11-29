@@ -12,6 +12,10 @@ variable "private_key_path" {
   default = ""
 }
 
+variable "app_name" {
+  default     = "Example"
+  description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, ATP, and others"
+}
 variable "tag_values" {
   type = map(any)
   default = { "freeformTags" = {

@@ -1,6 +1,6 @@
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.0"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.1"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
@@ -28,8 +28,8 @@ locals {
     {
       subnet_name                = "test_subnet"
       cidr_block                 = cidrsubnet("10.0.0.0/16", 8, 35) # e.g.: "10.0.35.0/24" = 254 usable IPs (10.20.35.0 - 10.20.35.255)
-      display_name               = "Test subnet (Dev)"
-      dns_label                  = "testdev"
+      display_name               = "Test subnet (${local.deploy_id})"
+      dns_label                  = "test${local.deploy_id}"
       prohibit_public_ip_on_vnic = false
       prohibit_internet_ingress  = false
       route_table_id             = "" # module.route_tables["public"].route_table_id
