@@ -9,7 +9,7 @@ $${\color{red}OKE \space Cluster \space deployment \space yet.}$$
 ---
 
 [![Stack Release](https://img.shields.io/github/v/release/oracle-quickstart/terraform-oci-networking.svg)](https://github.com/oracle-quickstart/terraform-oci-networking/releases)
-[![Stack Build](https://img.shields.io/github/workflow/status/oracle-quickstart/terraform-oci-networking/Generate%20stacks%20and%20publish%20release?label=stack&logo=oracle&logoColor=red)][magic_oke_stack]
+[![Stack Build](https://img.shields.io/github/workflow/status/oracle-quickstart/terraform-oci-networking/Generate%20stacks%20and%20publish%20release?label=stack&logo=oracle&logoColor=red)][magic_oci_networking_stack]
 [![AquaSec TFSec](https://img.shields.io/github/workflow/status/oracle-quickstart/terraform-oci-networking/tfsec?label=tfsec&logo=aqua)](#)
 ![Terraform](https://img.shields.io/badge/terraform->%3D%201.1-%235835CC.svg?logo=terraform)
 [![Stack License](https://img.shields.io/github/license/oracle-quickstart/terraform-oci-networking)](https://github.com/oracle-quickstart/terraform-oci-networking/tree/main/LICENSE)
@@ -28,17 +28,45 @@ There are multiple examples included in the [examples](https://github.com/oracle
 
 ```hcl
 module "oci-networking" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking?ref=0.1.0"
+  source = "github.com/oracle-quickstart/terraform-oci-networking?ref=0.1.1"
+
+  # Oracle Cloud Infrastructure Tenancy and Compartment OCID
+  tenancy_ocid     = var.tenancy_ocid
+  compartment_ocid = var.compartment_ocid
+  region           = var.region
+
+  # Note: Just few arguments are showing here to simplify the basic example. All other arguments are using default values.
+  # App Name to identify deployment. Used for naming resources.
+  app_name = "Basic"
+
+  # Freeform Tags + Defined Tags. Tags are applied to all resources.
+  tag_values = { "freeformTags" = { "Environment" = "Development", "DeploymentType" = "basic", "QuickstartExample" = "basic-vcn" }, "definedTags" = {} }
+
+  subnets = [
+    {
+      subnet_name                = "test_subnet"
+      cidr_block                 = cidrsubnet("10.0.0.0/16", 8, 35) # e.g.: "10.0.35.0/24" = 254 usable IPs (10.20.35.0 - 10.20.35.255)
+      display_name               = "Test subnet (Basic)"
+      dns_label                  = null
+      prohibit_public_ip_on_vnic = false
+      prohibit_internet_ingress  = false
+      route_table_id             = ""
+      dhcp_options_id            = ""
+      security_list_ids          = []
+      ipv6cidr_block             = null
+    },
+  ]
+}
 ```
 
 ### Separate each module usage
 
 ```hcl
 module "vcn" {
-  source = "./modules/oci-networking/modules/vcn"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.1.1"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
-  compartment_ocid = local.vcn_compartment_ocid
+  compartment_ocid = var.compartment_ocid
 
   # Deployment Tags + Freeform Tags + Defined Tags
   vcn_tags = local.oci_tag_values
@@ -46,16 +74,16 @@ module "vcn" {
   # Virtual Cloud Network (VCN) arguments
   create_new_vcn          = true
   existent_vcn_ocid       = ""
-  cidr_blocks             = [10.0.0.0/16]
-  display_name            = "Dev VCN"
-  dns_label               = ""
+  cidr_blocks             = ["10.0.0.0/16"]
+  display_name            = "[Example] VCN (Dev)"
+  dns_label               = "example123"
   is_ipv6enabled          = false
   ipv6private_cidr_blocks = []
 }
 
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "./modules/oci-networking/modules/subnet"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.1"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
@@ -88,7 +116,7 @@ locals {
       subnet_name                = "test_subnet"
       cidr_block                 = cidrsubnet("10.0.0.0/16", 8, 35) # e.g.: "10.0.35.0/24" = 254 usable IPs (10.20.35.0 - 10.20.35.255)
       display_name               = "Test subnet (Dev)"
-      dns_label                  = "testdev"
+      dns_label                  = ""
       prohibit_public_ip_on_vnic = false
       prohibit_internet_ingress  = false
       route_table_id             = "" # module.route_tables["public"].route_table_id
@@ -128,4 +156,4 @@ See [LICENSE](./LICENSE) for more details.
 [oci_rm]: https://docs.cloud.oracle.com/iaas/Content/ResourceManager/Concepts/resourcemanager.htm
 [oci_tf_provider]: https://www.terraform.io/docs/providers/oci/index.html
 [magic_button]: https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg
-[magic_oke_stack]: https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-networking/releases/latest/download/terraform-oci-networking-stack.zip
+[magic_oci_networking_stack]: https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/terraform-oci-networking/releases/latest/download/terraform-oci-networking-stack.zip

@@ -144,7 +144,7 @@ module "security_lists" {
   ingress_security_rules = each.value.ingress_security_rules
 }
 
-resource "oci_identity_compartment" "oke_compartment" {
+resource "oci_identity_compartment" "vcn_compartment" {
   compartment_id = var.compartment_ocid
   name           = "${local.app_name_normalized}-${local.deploy_id}"
   description    = "${local.app_name} ${var.vcn_compartment_description} (Deployment ${local.deploy_id})"
@@ -153,5 +153,5 @@ resource "oci_identity_compartment" "oke_compartment" {
   count = var.create_new_compartment_for_vcn ? 1 : 0
 }
 locals {
-  vcn_compartment_ocid = local.create_new_vcn ? (var.create_new_compartment_for_vcn ? oci_identity_compartment.oke_compartment.0.id : var.compartment_ocid) : var.existent_vcn_ocid
+  vcn_compartment_ocid = local.create_new_vcn ? (var.create_new_compartment_for_vcn ? oci_identity_compartment.vcn_compartment.0.id : var.compartment_ocid) : var.existent_vcn_ocid
 }

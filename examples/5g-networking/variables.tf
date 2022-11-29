@@ -1,7 +1,3 @@
-# Copyright (c) 2022, Oracle and/or its affiliates. All rights reserved.
-# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl.
-# 
-
 # OCI Provider
 variable "tenancy_ocid" {}
 variable "compartment_ocid" {}
@@ -16,17 +12,18 @@ variable "private_key_path" {
   default = ""
 }
 
-
-# App defaults
+################################################################################
+# App Name to identify deployment. Used for naming resources.
+################################################################################
 variable "app_name" {
-  default     = "Generic"
+  default     = "Dev 5G Example"
   description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, ATP, and others"
 }
 variable "tag_values" {
   type = map(any)
   default = { "freeformTags" = {
-    "Environment" = "Development",  # e.g.: Demo, Sandbox, Development, QA, Stage, ...
-    "DeploymentType" = "generic" }, # e.g.: App Type 1, App Type 2, Red, Purple, ...
+    "Environment" = "Development", # e.g.: Demo, Sandbox, Development, QA, Stage, ...
+    "DeploymentType" = "5G" },     # e.g.: App Type 1, App Type 2, Red, Purple, ...
   "definedTags" = {} }
   description = "Use Tagging to add metadata to resources. All resources created by this stack will be tagged with the selected tag values."
 }
@@ -55,7 +52,7 @@ variable "existent_vcn_compartment_ocid" {
   description = "Compartment OCID for existent Virtual Cloud Network (VCN)."
 }
 variable "vcn_cidr_blocks" {
-  default     = "10.0.0.0/16"
+  default     = "10.75.0.0/16"
   description = "IPv4 CIDR Blocks for the Virtual Cloud Network (VCN). If use more than one block, separate them with comma. e.g.: 10.20.0.0/16,10.80.0.0/16. If you plan to peer this VCN with another VCN, the VCNs must not have overlapping CIDRs."
 }
 variable "is_ipv6enabled" {
@@ -69,20 +66,4 @@ variable "ipv6private_cidr_blocks" {
 variable "create_subnets" {
   default     = true
   description = "Create subnets for the Virtual Cloud Network (VCN). If false, the subnets must be provided in the variable 'subnets'."
-}
-variable "subnets" {
-  default     = []
-  description = "Subnets for the Virtual Cloud Network (VCN)."
-}
-variable "route_tables" {
-  default     = []
-  description = "Route Tables for the Virtual Cloud Network (VCN)."
-}
-variable "security_lists" {
-  default     = []
-  description = "Security Lists for the Virtual Cloud Network (VCN)."
-}
-
-locals {
-  vcn_cidr_blocks = split(",", var.vcn_cidr_blocks)
 }
