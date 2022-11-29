@@ -43,7 +43,7 @@ variable "create_new_compartment_for_vcn" {
   description = "Creates new compartment for VCN.  NOTE: The creation of the compartment increases the deployment time by at least 3 minutes, and can increase by 15 minutes when destroying"
 }
 variable "vcn_compartment_description" {
-  default = "Compartment for VCN and Network resources"
+  default     = "Compartment for VCN and Network resources"
   description = "Description for new VCN Compartment"
 }
 variable "existent_vcn_ocid" {
@@ -84,5 +84,5 @@ variable "security_lists" {
 }
 
 locals {
-  vcn_cidr_blocks      = split(",", var.vcn_cidr_blocks)
+  vcn_cidr_blocks = split(",", var.vcn_cidr_blocks)
 }

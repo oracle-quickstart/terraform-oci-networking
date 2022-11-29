@@ -7,7 +7,7 @@
 # Locals
 locals {
   deploy_id   = random_string.deploy_id.result
-  deploy_tags = { "DeploymentID" = local.deploy_id, "AppName" = local.app_name, "Quickstart" = "terraform-oci-networking" , "QuickstartExample" = "basic-vcn-using-submodules"}
+  deploy_tags = { "DeploymentID" = local.deploy_id, "AppName" = local.app_name, "Quickstart" = "terraform-oci-networking", "QuickstartExample" = "basic-vcn-using-submodules" }
   oci_tag_values = {
     "freeformTags" = merge(var.tag_values.freeformTags, local.deploy_tags),
     "definedTags"  = var.tag_values.definedTags

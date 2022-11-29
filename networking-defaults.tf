@@ -11,12 +11,12 @@
 # Required locals for the oci-networking module
 ################################################################################
 locals {
-  create_new_vcn                = var.create_new_vcn == null ? true : var.create_new_vcn
-  vcn_display_name              = "[${local.app_name}] VCN (${local.deploy_id})"
-  create_subnets                = var.create_subnets == null ? true : var.create_subnets
-  subnets                       = concat(var.subnets, local.extra_subnets)
-  route_tables                  = concat(var.route_tables)
-  security_lists                = concat(var.security_lists)
+  create_new_vcn   = var.create_new_vcn == null ? true : var.create_new_vcn
+  vcn_display_name = "[${local.app_name}] VCN (${local.deploy_id})"
+  create_subnets   = var.create_subnets == null ? true : var.create_subnets
+  subnets          = concat(var.subnets, local.extra_subnets)
+  route_tables     = concat(var.route_tables)
+  security_lists   = concat(var.security_lists)
 }
 
 ################################################################################
