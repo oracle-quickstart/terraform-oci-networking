@@ -3,7 +3,7 @@
 ################################################################################
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.2"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.2.0"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
