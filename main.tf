@@ -25,7 +25,7 @@ module "vcn" {
   source = "./modules/vcn"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
-  compartment_ocid = local.vcn_compartment_ocid
+  compartment_ocid = local.pre_vcn_compartment_ocid
 
   # Deployment Tags + Freeform Tags + Defined Tags
   vcn_tags = local.oci_tag_values
@@ -153,5 +153,7 @@ resource "oci_identity_compartment" "vcn_compartment" {
   count = var.create_new_compartment_for_vcn ? 1 : 0
 }
 locals {
-  vcn_compartment_ocid = local.create_new_vcn ? (var.create_new_compartment_for_vcn ? oci_identity_compartment.vcn_compartment.0.id : var.compartment_ocid) : var.existent_vcn_ocid
+  pre_vcn_compartment_ocid = local.create_new_vcn ? (var.create_new_compartment_for_vcn ? oci_identity_compartment.vcn_compartment.0.id : var.compartment_ocid) : var.existent_vcn_compartment_ocid
+  existent_vcn_compartment_ocid = (var.existent_vcn_compartment_ocid == "") ? module.vcn.compartment_id : var.existent_vcn_compartment_ocid
+  vcn_compartment_ocid = (local.pre_vcn_compartment_ocid == "") ? local.existent_vcn_compartment_ocid : local.pre_vcn_compartment_ocid
 }
