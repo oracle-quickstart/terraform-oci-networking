@@ -3,7 +3,7 @@
 ################################################################################
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.1"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -30,7 +30,7 @@ locals {
   subnets = [
     {
       subnet_name                = "5GC_OAM_subnet"
-      cidr_block                 = lookup(local.network_cidrs, "SUBNET-5GC-OAM-CIDR")
+      cidr_block                 = lookup(local.network_5G_cidrs, "SUBNET-5GC-OAM-CIDR")
       display_name               = "5GC OAM subnet (${local.deploy_id})"
       dns_label                  = "sn5gcoam${local.deploy_id}"
       prohibit_public_ip_on_vnic = true
@@ -42,7 +42,7 @@ locals {
     },
     {
       subnet_name                = "5GC_Signalling_subnet"
-      cidr_block                 = lookup(local.network_cidrs, "SUBNET-5GC-SIGNALLING-CIDR")
+      cidr_block                 = lookup(local.network_5G_cidrs, "SUBNET-5GC-SIGNALLING-CIDR")
       display_name               = "5GC Signalling (SBI) subnet (${local.deploy_id})"
       dns_label                  = "sn5gcsig${local.deploy_id}"
       prohibit_public_ip_on_vnic = true
@@ -54,7 +54,7 @@ locals {
     },
     {
       subnet_name                = "5G_RAN_subnet"
-      cidr_block                 = lookup(local.network_cidrs, "SUBNET-5G-RAN-CIDR")
+      cidr_block                 = lookup(local.network_5G_cidrs, "SUBNET-5G-RAN-CIDR")
       display_name               = "5G RAN subnet (${local.deploy_id})"
       dns_label                  = "sn5gran${local.deploy_id}"
       prohibit_public_ip_on_vnic = true
@@ -66,7 +66,7 @@ locals {
     },
     {
       subnet_name                = "Legal_Intercept_subnet"
-      cidr_block                 = lookup(local.network_cidrs, "SUBNET-LEGAL-INTERCEPT-CIDR")
+      cidr_block                 = lookup(local.network_5G_cidrs, "SUBNET-LEGAL-INTERCEPT-CIDR")
       display_name               = "Legal Intercept subnet (${local.deploy_id})"
       dns_label                  = "snlegalin${local.deploy_id}"
       prohibit_public_ip_on_vnic = true
@@ -78,7 +78,7 @@ locals {
     },
     {
       subnet_name                = "5G_EPC_subnet"
-      cidr_block                 = lookup(local.network_cidrs, "SUBNET-5G-EPC-CIDR")
+      cidr_block                 = lookup(local.network_5G_cidrs, "SUBNET-5G-EPC-CIDR")
       display_name               = "5G EPC subnet (${local.deploy_id})"
       dns_label                  = "sn5gcepc${local.deploy_id}"
       prohibit_public_ip_on_vnic = true

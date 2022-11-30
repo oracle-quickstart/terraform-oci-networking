@@ -2,7 +2,7 @@
 # Module: Gateways
 ################################################################################
 module "gateways" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/gateways?ref=0.1.1"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/gateways?ref=0.1.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid

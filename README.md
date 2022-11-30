@@ -26,7 +26,7 @@ There are multiple examples included in the [examples](https://github.com/oracle
 
 ```hcl
 module "oci-networking" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking?ref=0.1.1"
+  source = "github.com/oracle-quickstart/terraform-oci-networking?ref=0.1.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   tenancy_ocid     = var.tenancy_ocid
@@ -61,7 +61,7 @@ module "oci-networking" {
 
 ```hcl
 module "vcn" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.1.1"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.1.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
@@ -81,7 +81,7 @@ module "vcn" {
 
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.1"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
