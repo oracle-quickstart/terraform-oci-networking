@@ -1,5 +1,5 @@
 module "vcn" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.1.2"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.2.0"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
@@ -14,7 +14,7 @@ module "vcn" {
 
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.1.2"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.2.0"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = var.compartment_ocid
@@ -55,7 +55,7 @@ locals {
 
 module "route_tables" {
   for_each = { for map in local.route_tables : map.route_table_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/route_table?ref=0.1.2"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/route_table?ref=0.2.0"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -85,7 +85,7 @@ locals {
 }
 
 module "gateways" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/gateways?ref=0.1.2"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/gateways?ref=0.2.0"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -102,7 +102,7 @@ module "gateways" {
 
 module "security_lists" {
   for_each = { for map in local.security_lists : map.security_list_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/security_list?ref=0.1.2"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/security_list?ref=0.2.0"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -170,8 +170,8 @@ data "oci_core_services" "all_services_network" {
 locals {
   # vcn_cidr_blocks = split(",", var.vcn_cidr_blocks)
   vcn_compartment_ocid = var.compartment_ocid
-    pre_vcn_cidr_blocks = split(",", var.vcn_cidr_blocks)
-    vcn_cidr_blocks = contains(module.vcn.cidr_blocks, local.pre_vcn_cidr_blocks[0]) ? distinct(concat([local.pre_vcn_cidr_blocks[0]],module.vcn.cidr_blocks)) : module.vcn.cidr_blocks
+  pre_vcn_cidr_blocks  = split(",", var.vcn_cidr_blocks)
+  vcn_cidr_blocks      = contains(module.vcn.cidr_blocks, local.pre_vcn_cidr_blocks[0]) ? distinct(concat([local.pre_vcn_cidr_blocks[0]], module.vcn.cidr_blocks)) : module.vcn.cidr_blocks
   network_cidrs = {
     APIGW-FN-REGIONAL-SUBNET-CIDR = cidrsubnet(local.vcn_cidr_blocks[0], 8, 30) # e.g.: "10.20.30.0/24" = 254 usable IPs (10.20.30.0 - 10.20.30.255)
     ALL-CIDR                      = "0.0.0.0/0"
