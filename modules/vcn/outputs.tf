@@ -8,9 +8,33 @@ output "vcn_id" {
 output "default_dhcp_options_id" {
   value = data.oci_core_vcn.main_or_existent.default_dhcp_options_id
 }
+output "compartment_id" {
+  value = data.oci_core_vcn.main_or_existent.compartment_id
+}
 output "default_route_table_id" {
   value = data.oci_core_vcn.main_or_existent.default_route_table_id
 }
 output "default_security_list_id" {
   value = data.oci_core_vcn.main_or_existent.default_security_list_id
+}
+output "dns_label" {
+  value = data.oci_core_vcn.main_or_existent.dns_label
+}
+output "display_name" {
+  value = data.oci_core_vcn.main_or_existent.display_name
+}
+output "cidr_blocks" {
+  value = data.oci_core_vcn.main_or_existent.cidr_blocks
+}
+output "byoipv6cidr_blocks" {
+  value = data.oci_core_vcn.main_or_existent.byoipv6cidr_blocks
+}
+output "ipv6cidr_blocks" {
+  value = data.oci_core_vcn.main_or_existent.ipv6cidr_blocks
+}
+output "ipv6public_cidr_blocks" {
+  value = data.oci_core_vcn.main_or_existent.ipv6public_cidr_blocks
+}
+output "vcn_domain_name" {
+  value = data.oci_core_vcn.main_or_existent.vcn_domain_name
 }
