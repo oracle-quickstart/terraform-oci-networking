@@ -16,7 +16,7 @@ module "oci-networking" {
   subnets = [
     {
       subnet_name                = "test_subnet"
-      cidr_block                 = cidrsubnet("10.0.0.0/16", 8, 35) # e.g.: "10.0.35.0/24" = 254 usable IPs (10.20.35.0 - 10.20.35.255)
+      cidr_block                 = cidrsubnet("10.10.0.0/16", 8, 35) # e.g.: "10.0.35.0/24" = 254 usable IPs (10.20.35.0 - 10.20.35.255)
       display_name               = "Test subnet (Basic)"
       dns_label                  = null
       prohibit_public_ip_on_vnic = false

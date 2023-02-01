@@ -14,7 +14,7 @@ compartment_ocid = "ocid1.compartment...."
 # region
 region = "us-ashburn-1"
 
-vcn_cidr_blocks = "10.16.0.0/16"
+vcn_cidr_blocks = "10.15.0.0/16"
 
 # Tags
 tag_values = {
@@ -24,4 +24,4 @@ tag_values = {
     "test1"       = "one1"
     "test2"       = "two2"
   }
-}
+} 
