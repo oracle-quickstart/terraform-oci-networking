@@ -1,5 +1,5 @@
 module "oci-networking" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking?ref=0.2.0"
+  source = "github.com/oracle-quickstart/terraform-oci-networking?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   tenancy_ocid     = var.tenancy_ocid
