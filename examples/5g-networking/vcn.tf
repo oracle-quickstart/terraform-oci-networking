@@ -3,7 +3,7 @@
 # Module: Virtual Cloud Network (VCN)
 ################################################################################
 module "vcn" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.2.0"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid

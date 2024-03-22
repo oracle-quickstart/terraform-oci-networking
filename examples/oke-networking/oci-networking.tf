@@ -23,7 +23,7 @@
 # Module: Virtual Cloud Network (VCN)
 ################################################################################
 module "vcn" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.2.0"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/vcn?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -46,7 +46,7 @@ module "vcn" {
 ################################################################################
 module "subnets" {
   for_each = { for map in local.subnets : map.subnet_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.2.0"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/subnet?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -79,7 +79,7 @@ module "subnets" {
 # Module: Gateways
 ################################################################################
 module "gateways" {
-  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/gateways?ref=0.2.0"
+  source = "github.com/oracle-quickstart/terraform-oci-networking//modules/gateways?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -113,7 +113,7 @@ module "gateways" {
 ################################################################################
 module "route_tables" {
   for_each = { for map in local.route_tables : map.route_table_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/route_table?ref=0.2.0"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/route_table?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
@@ -134,7 +134,7 @@ module "route_tables" {
 ################################################################################
 module "security_lists" {
   for_each = { for map in local.security_lists : map.security_list_name => map }
-  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/security_list?ref=0.2.0"
+  source   = "github.com/oracle-quickstart/terraform-oci-networking//modules/security_list?ref=0.3.2"
 
   # Oracle Cloud Infrastructure Tenancy and Compartment OCID
   compartment_ocid = local.vcn_compartment_ocid
